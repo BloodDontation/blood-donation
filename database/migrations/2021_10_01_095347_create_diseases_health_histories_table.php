@@ -18,7 +18,6 @@ class CreateDiseasesHealthHistoriesTable extends Migration
             $table->bigInteger("i_health_histories");
             $table->bigInteger("i_diseases");
             $table->timestamps();
-            
         });
     }
 
