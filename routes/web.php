@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,19 @@ Route::get('/', function () {
     ]);
 });
 
+Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
+    // ->middleware(['auth:sanctum', 'verified'])
+
+    Route::prefix('admin')->group(function() {
+
+        Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin-dashboard');
+
+        Route::get('/sessions', [\App\Http\Controllers\Admin\HomeController::class, 'sessions'])->name('admin-sessions');
+
+    });
+
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 

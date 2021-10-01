@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Extra\SystemDictionary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -38,7 +40,20 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
 
-            'xyz'   =>  'ahmed',
+            'lang' => [
+
+                'current_language'      => App::getLocale(),
+                'dictionary'            =>  SystemDictionary::DICTIONARY[APP::currentLocale()],
+                'supported_languages'   => [
+                    'en' => [
+                        'key'   => 'English',
+                    ],
+                    'ar' => [
+                        'key'   => 'العربية',
+                    ]
+                ],
+
+            ],
 
         ]);
     }
