@@ -18,10 +18,10 @@ trait MainTrait {
                 "childs"            =>  [],
             ],
 
-            "sessions" => [
+            "campaign" => [
                 "title"             =>  "Dashboard",
-                "icon"              =>  "fas fa-home",
-                "route"             =>  "admin-dashboard",
+                "icon"              =>  "fas fa-building",
+                "route"             =>  "admin-campaigns-index",
                 "is_active"         =>  false,
                 "permission"        =>  "dashboard",
                 "childs"            =>  [],
@@ -39,12 +39,23 @@ trait MainTrait {
         {
 
             'dashboard'         => 0,
-            'sessions'          => 1,
+            'campaigns'         => 1,
             'user-management'   => 2,
             'settings'          => 3,
             default             => 0,
 
         };
+
+    }
+
+    public function return_toast_result($flag, $status, $message)
+    {
+
+        return [
+            "flag"      => $flag,
+            "status"    => $status,
+            "message"   => $message,
+        ];
 
     }
 

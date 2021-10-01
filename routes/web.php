@@ -32,7 +32,20 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin-dashboard');
 
-        Route::get('/sessions', [\App\Http\Controllers\Admin\HomeController::class, 'sessions'])->name('admin-sessions');
+        Route::prefix('campaign/')->group(function() {
+
+            Route::get('/', [\App\Http\Controllers\Admin\CampaignController::class, 'index'])->name('admin-campaigns-index');
+
+            Route::get('/create', [\App\Http\Controllers\Admin\CampaignController::class, 'create'])->name('admin-campaigns-create');
+
+            Route::get('/{id}/edit', [\App\Http\Controllers\Admin\CampaignController::class, 'edit'])->name('admin-campaigns-edit');
+
+            Route::post('/store', [\App\Http\Controllers\Admin\CampaignController::class, 'store'])->name('admin-campaigns-store');
+
+            Route::post('/update', [\App\Http\Controllers\Admin\CampaignController::class, 'update'])->name('admin-campaigns-update');
+
+        });
+
 
     });
 

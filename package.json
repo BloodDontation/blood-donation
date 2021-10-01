@@ -26,6 +26,9 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "daisyui": "^1.14.1"
+        "daisyui": "^1.14.1",
+        "mosha-vue-toastify": "^1.0.23",
+        "vue3-datepicker": "^0.2.5",
+        "vue3-timepicker": "^1.0.0-beta.2"
     }
 }
