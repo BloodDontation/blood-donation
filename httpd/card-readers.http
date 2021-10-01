@@ -1,0 +1,18 @@
+POST http://localhost:5050/api/operation/ReadCard
+Content-Type: application/json
+
+{
+    "ReadCardInfo": false,
+    "ReadPersonalInfo": false,
+    "ReadAddressDetails": true,
+    "ReadBiometrics": true,
+    "ReadEmploymentInfo": false,
+    "ReadImmigrationDetails": true,
+    "ReadTrafficDetails": false,
+    "SilentReading": false,
+    "ReaderIndex": -1,
+    "ReaderName": "",
+    "OutputFormat": "JSON"
+}
+
+###
