@@ -46,6 +46,18 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
+        Route::prefix('stages/')->group(function() {
+
+            Route::get('/', [\App\Http\Controllers\Admin\StagesController::class, 'index'])->name('admin-stages-index');
+
+            Route::get('/create', [\App\Http\Controllers\Admin\StagesController::class, 'create'])->name('admin-stages-create');
+
+            Route::get('/{id}/edit', [\App\Http\Controllers\Admin\StagesController::class, 'edit'])->name('admin-stages-edit');
+
+            Route::post('/store', [\App\Http\Controllers\Admin\StagesController::class, 'store'])->name('admin-stages-store');
+
+        });
+
 
     });
 

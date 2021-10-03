@@ -27,6 +27,15 @@ trait MainTrait {
                 "childs"            =>  [],
             ],
 
+            "stages" => [
+                "title"             =>  "stages",
+                "icon"              =>  "fas fa-building",
+                "route"             =>  "admin-stages-index",
+                "is_active"         =>  false,
+                "permission"        =>  "dashboard",
+                "childs"            =>  [],
+            ],
+
 
 
         ]
@@ -42,6 +51,7 @@ trait MainTrait {
             'campaigns'         => 1,
             'user-management'   => 2,
             'settings'          => 3,
+            'stages'          => 4,
             default             => 0,
 
         };
