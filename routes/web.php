@@ -54,6 +54,8 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
             Route::get('/{id}/edit', [\App\Http\Controllers\Admin\StagesController::class, 'edit'])->name('admin-stages-edit');
 
+            Route::post('/store', [\App\Http\Controllers\Admin\StagesController::class, 'store'])->name('admin-stages-store');
+
         });
 
 
