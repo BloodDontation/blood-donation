@@ -63,6 +63,13 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
+        Route::prefix('plans/')->group(function() {
+
+            Route::get('/', [\App\Http\Controllers\Admin\PlanController::class, 'index'])->name('admin-plan-index');
+
+
+        });
+
 
     });
 
