@@ -21,7 +21,7 @@
 
                 </div>
 
-                <form @submit.prevent="add_stages">
+                <form @submit.prevent="add_plan">
 
                     <div class="whitespace-nowrap overflow-x-auto">
 
@@ -55,96 +55,6 @@
                                         <label class="label" v-if="errors.name">
                                             <span class="label-text-alt text-red-500">
                                                 {{errors.name}}
-                                            </span>
-                                        </label>
-
-                                    </div>
-
-
-                                    <div class="flex form-control w-full md:w-1/2 px-2">
-
-                                        <label class="label">
-                                            <span class="label-text required">
-                                                {{trans('Type')}}
-                                            </span>
-                                        </label>
-
-                                        <div class="relative">
-
-                                            <span class="absolute top-0 left-0 rounded-r-none btn" disabled>
-                                                <i class="fas fa-align-left text-xl"></i>
-                                            </span>
-
-                                            <select v-model="stages.type"
-                                                    :class="[ errors.type ? 'input-error' : 'input-primary' ]"
-                                                    class="w-full pl-16 input input-bordered">
-                                                <option value="Required">Required</option>
-                                                <option value="Optioninal">Optioninal</option>
-                                            </select>
-
-                                        </div>
-
-                                        <label class="label" v-if="errors.type">
-                                            <span class="label-text-alt text-red-500">
-                                                {{errors.type}}
-                                            </span>
-                                        </label>
-
-                                    </div>
-
-                                    <div class="flex form-control w-full md:w-1/2 px-2">
-
-                                        <label class="label">
-                                            <span class="label-text required">
-                                                {{trans('Prerequisite')}}
-                                            </span>
-                                        </label>
-
-                                        <div class="relative">
-
-                                            <span class="absolute top-0 left-0 rounded-r-none btn" disabled>
-                                                <i class="fas fa-align-left text-xl"></i>
-                                            </span>
-
-
-                                            <select v-model="stages.prerequisite"
-                                                    :class="[ errors.prerequisite ? 'input-error' : 'input-primary' ]"
-                                                    @change="setCodeAndLabelForForm($event.target.selectedIndex)"
-                                                    class="w-full pl-16 input input-bordered">
-                                                <option value="">None</option>
-                                                <option v-for="i in stages1" :value="i.id">{{ i.name }}</option>
-                                            </select>
-
-                                        </div>
-
-                                        <label class="label" v-if="errors.prerequisite">
-                                            <span class="label-text-alt text-red-500">
-                                                {{errors.prerequisite}}
-                                            </span>
-                                        </label>
-
-                                    </div>
-
-                                    <div class="flex form-control w-full px-2">
-
-                                        <label class="label">
-                                            <span class="label-text required">
-                                                {{trans('description')}}
-                                            </span>
-                                        </label>
-
-                                        <div class="relative">
-
-                                            <textarea v-model="stages.description"
-                                                      :class="[ errors.description ? 'input-error' : 'input-primary' ]"
-                                                      class="textarea h-28 w-full textarea-bordered">
-                                            </textarea>
-
-                                        </div>
-
-                                        <label class="label" v-if="errors.description">
-                                            <span class="label-text-alt text-red-500">
-                                                {{errors.description}}
                                             </span>
                                         </label>
 
@@ -252,14 +162,14 @@
 
         methods: {
 
-            add_stages: function () {
+            add_plan: function () {
 
                 this.stages.transform(data => ({
 
                     ...data,
 
                 }))
-                    .post(this.route('admin-stages-store'), {
+                    .post(this.route('admin-plan-store'), {
 
                         // onFinish: () => this.$refs.admin_layout.show_toast(),
                         onsSuccess: () => {

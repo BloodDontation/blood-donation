@@ -67,6 +67,12 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
             Route::get('/', [\App\Http\Controllers\Admin\PlanController::class, 'index'])->name('admin-plan-index');
 
+            Route::get('/create', [\App\Http\Controllers\Admin\PlanController::class, 'create'])->name('admin-plan-create');
+
+            Route::post('/create', [\App\Http\Controllers\Admin\PlanController::class, 'store'])->name('admin-plan-store');
+
+            Route::get('/{id}/edit', [\App\Http\Controllers\Admin\PlanController::class, 'edit'])->name('admin-plan-edit');
+            Route::put('/{id}/update-position', [\App\Http\Controllers\Admin\PlanController::class, 'position'])->name('admin-position-edit');
 
         });
 

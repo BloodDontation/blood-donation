@@ -20,7 +20,7 @@
 
                     <div class="my-6">
 
-                        <a :href="route('admin-stages-create')" class="btn">
+                        <a :href="route('admin-plan-create')" class="btn">
                             {{trans('add')}}
                         </a>
 
@@ -61,7 +61,7 @@
 
                                     <!-- v-if="can(needed_permissions,'update-item')" -->
                                     <a
-                                        :href="route('admin-stages-edit', {id: plans.id})"
+                                        :href="route('admin-plan-edit', {id: plans.id})"
                                         class="btn"
                                         aria-label="Edit">
 
