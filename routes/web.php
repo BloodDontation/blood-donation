@@ -26,6 +26,11 @@ Route::get('/', function () {
 
 Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
+    // register
+    Route::get('registration', [\App\Http\Controllers\RegisterDonorController::class, 'register_form'])->name('donor-register-form');
+
+    Route::post('register', [\App\Http\Controllers\RegisterDonorController::class, 'register'])->name('donor-register');
+
     // ->middleware(['auth:sanctum', 'verified'])
 
     Route::prefix('admin')->group(function() {

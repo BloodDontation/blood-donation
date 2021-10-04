@@ -45,6 +45,47 @@ createInertiaApp({
 
                         return translate ?? key;
 
+                    },
+
+                    return_array_for_select(array, value_key, name_key, add_new_option = false, full_object_with_index = false, index = -1, translate = false)
+                    {
+
+                        let list = array.map((object) => {
+
+                            let value = object[value_key];
+
+                            if ( full_object_with_index )
+                            {
+                                value = {
+                                    object: object,
+                                    index: index
+                                };
+                            }
+
+                            return {
+
+                                value: value,
+                                name: translate ? this.trans(object[name_key]) : object[name_key],
+                                icon: null,
+
+                            };
+
+                        });
+
+                        if ( add_new_option )
+                        {
+
+                            const new_option =
+                            {
+                                value: -1,
+                                name: this.trans('add'),
+                                icon: 'fas fa-plus-square',
+                            }
+
+                            list = [new_option, ...list];
+                        }
+
+                        return list;
 
                     },
 
