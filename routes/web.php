@@ -61,6 +61,8 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
             Route::post('/store', [\App\Http\Controllers\Admin\StagesController::class, 'store'])->name('admin-stages-store');
 
+            Route::get('/insert-donor', [\App\Http\Controllers\Admin\StagesController::class, 'interStage'])->name('admin-insert-donor-store');
+
         });
 
         Route::prefix('plans/')->group(function() {

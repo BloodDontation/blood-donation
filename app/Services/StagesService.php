@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Extra\MainTrait;
+use App\Models\Admin\Donor_stages;
+use App\Models\Admin\Plan_stages;
 use App\Models\Admin\Stage;
 use Exception;
 
@@ -71,7 +73,19 @@ class StagesService {
 
     }
 
+    public function get_stage_of_donor($plan_id, $term = '', $columns = ['*'])
+    {
 
+        try
+        {
+            return Donor_stages::select($columns)->Donor($plan_id)->orderBy('position')->get();
+        }
+        catch(Exception $ex)
+        {
+            return 'error';
+        }
+
+    }
 
 
 
