@@ -36,6 +36,15 @@ trait MainTrait {
                 "childs"            =>  [],
             ],
 
+            "plans" => [
+                "title"             =>  "plans",
+                "icon"              =>  "fas fa-building",
+                "route"             =>  "admin-plan-index",
+                "is_active"         =>  false,
+                "permission"        =>  "dashboard",
+                "childs"            =>  [],
+            ],
+
 
 
         ]
@@ -51,7 +60,8 @@ trait MainTrait {
             'campaigns'         => 1,
             'user-management'   => 2,
             'settings'          => 3,
-            'stages'          => 4,
+            'stages'            => 4,
+            'plans'             => 5,
             default             => 0,
 
         };
