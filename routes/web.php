@@ -46,6 +46,10 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
+        Route::get('/qrtest', function () {
+            return Inertia::render('tests/QrTests');
+        });
+
 
     });
 
