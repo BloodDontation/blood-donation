@@ -209,15 +209,15 @@
                                                 <i class="fas fa-align-left text-xl"></i>
                                             </span>
 
-                                            <input v-model="campaign.donor_per_hour"
-                                                :class="[ errors.donor_per_hour ? 'input-error' : 'input-primary' ]"
+                                            <input v-model="campaign.donor_per_period"
+                                                :class="[ errors.donor_per_period ? 'input-error' : 'input-primary' ]"
                                                 type="number" class="w-full pl-16 input input-bordered">
 
                                         </div>
 
-                                        <label class="label" v-if="errors.donor_per_hour">
+                                        <label class="label" v-if="errors.donor_per_period">
                                             <span class="label-text-alt text-red-500">
-                                                {{errors.donor_per_hour}}
+                                                {{errors.donor_per_period}}
                                             </span>
                                         </label>
 
@@ -338,7 +338,7 @@
                     start_time: null,
                     end_time: null,
                     total_donor : null,
-                    donor_per_hour : null,
+                    donor_per_period : null,
                     registration_status : false,
 
 

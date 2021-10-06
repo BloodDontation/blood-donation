@@ -10,6 +10,12 @@
 
             </div>
 
+            <!-- <div class="flex w-full">
+                <pre>
+                    {{errors}}
+                </pre>
+            </div> -->
+
             <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
 
                 <div class="flex w-full">
@@ -131,13 +137,6 @@
                         </label>
 
                         <div class="relative">
-
-                            <!-- <Multiselect
-                                v-model="donor.nationality"
-                                :options="nationalities"
-                                :searchable="true"
-                                class="w-full input input-bordered"
-                            ></Multiselect> -->
                             <input
                                 v-model="donor.phone"
                                 :class="[ errors.phone ? 'input-error' : 'input-primary' ]"
@@ -148,6 +147,36 @@
                         <label class="label" v-if="errors.phone">
                             <span class="label-text-alt text-red-500">
                                 {{errors.phone}}
+                            </span>
+                        </label>
+
+                    </div>
+
+                    <div class="flex form-control w-full md:w-1/2 px-2">
+                        <label class="label">
+                            <span class="label-text required">
+                                {{trans('email')}}
+                            </span>
+                        </label>
+
+                        <div class="relative">
+
+                            <!-- <Multiselect
+                                v-model="donor.nationality"
+                                :options="nationalities"
+                                :searchable="true"
+                                class="w-full input input-bordered"
+                            ></Multiselect> -->
+                            <input
+                                v-model="donor.email"
+                                :class="[ errors.email ? 'input-error' : 'input-primary' ]"
+                                type="email" class="w-full input input-bordered">
+
+                        </div>
+
+                        <label class="label" v-if="errors.email">
+                            <span class="label-text-alt text-red-500">
+                                {{errors.email}}
                             </span>
                         </label>
 
@@ -171,7 +200,7 @@
                             <input
                                 v-model="donor.nationality"
                                 :class="[ errors.nationality ? 'input-error' : 'input-primary' ]"
-                                type="number" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered">
 
                         </div>
 
@@ -202,7 +231,7 @@
                             <input
                                 v-model="donor.city"
                                 :class="[ errors.city ? 'input-error' : 'input-primary' ]"
-                                type="number" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered">
 
                         </div>
 
@@ -224,7 +253,7 @@
                         <div class="relative">
 
                             <Multiselect
-                                v-model="donor.blood_group"
+                                v-model="donor.blod_group"
                                 :options="blood_groups"
                                 :searchable="true"
                                 class="w-full input input-bordered"
@@ -232,9 +261,9 @@
 
                         </div>
 
-                        <label class="label" v-if="errors.blood_group">
+                        <label class="label" v-if="errors.blod_group">
                             <span class="label-text-alt text-red-500">
-                                {{errors.blood_group}}
+                                {{errors.blod_group}}
                             </span>
                         </label>
 
@@ -313,7 +342,7 @@
 
                     </div>
 
-                    <div class="flex form-control w-full md:w-1/2 px-2" v-if="false">
+                    <div class="flex form-control w-full px-2" v-if="false">
                         <label class="label">
                             <span class="label-text required">
                                 {{trans('last-donate-date')}}
@@ -337,27 +366,24 @@
 
                     </div>
 
-                    <div class="flex form-control w-full md:w-1/2 px-2">
+                    <div class="flex form-control">
 
-                        <div class="relative">
+                        <label class="cursor-pointer label">
 
-                            <label class="cursor-pointer label">
 
-                                <input v-model="donor.has_green_shield"
-                                    type="checkbox"
-                                    class="checkbox">
+                            <input v-model="donor.has_green_shield"
+                            type="checkbox"
+                            class="checkbox">
 
-                                <span class="label-text ml-2">
-                                    {{trans('has-green-shield')}}
-                                </span>
+                            <span class="label-text ml-2">
+                                {{trans('has-green-shield')}}
+                            </span>
 
-                            </label>
+                        </label>
 
-                        </div>
-
-                        <label class="label" v-if="errors.blood_group">
+                        <label class="label" v-if="errors.has_green_shield">
                             <span class="label-text-alt text-red-500">
-                                {{errors.blood_group}}
+                                {{errors.has_green_shield}}
                             </span>
                         </label>
 
@@ -438,6 +464,9 @@
 
                     diseases: [],
 
+                    has_green_shield: false,
+                    last_travel_date: null,
+
 
                 }),
 
@@ -483,8 +512,46 @@
                 }))
                 .post(this.route('donor-register'), {
 
-                    // onFinish: () => this.$refs.admin_layout.show_toast(),
+                    onFinish: () => {
+
+                        if ( this.$page.props?.flash?.toast )
+                        {
+
+                            this.$moshaToast( this.trans( this.$page.props.flash?.toast?.message ) , {
+
+                                type: this.$page.props.flash?.toast?.status,
+                                showIcon: true,
+                                hideProgressBar: true,
+
+
+                            });
+
+                        }
+
+                    },
+
                     onSuccess: () => {
+
+                        this.donor = {
+                            username: null,
+                            // password: null,
+                            name: null,
+                            phone: null,
+                            email: null,
+                            cpr: null,
+                            birth_date: null,
+                            city: null,
+                            gender: null,
+                            nationality: null,
+                            religion: null,
+                            blod_group: null,
+                            status: null,
+
+                            diseases: [],
+
+                            has_green_shield: false,
+                            last_travel_date: null,
+                        };
 
                     },
 
