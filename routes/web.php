@@ -31,6 +31,15 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
     Route::post('register', [\App\Http\Controllers\RegisterDonorController::class, 'register'])->name('donor-register');
 
+    Route::get('cancel-registration', function() {
+
+        return "<pre>
+                cancel the registration by entering cpr,
+            </pre>
+        ";
+
+    });
+
     // ->middleware(['auth:sanctum', 'verified'])
 
     Route::prefix('admin')->group(function() {
@@ -60,6 +69,33 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
             Route::get('/{id}/edit', [\App\Http\Controllers\Admin\StagesController::class, 'edit'])->name('admin-stages-edit');
 
             Route::post('/store', [\App\Http\Controllers\Admin\StagesController::class, 'store'])->name('admin-stages-store');
+
+        });
+
+        Route::get('donor-lists', function () {
+
+            return "<pre>
+                Listing donors and search and action to approve/reject
+            </pre>";
+
+        });
+
+        Route::get('donors-list-register', function () {
+
+            return "<pre>
+                Listing donors and search
+                button to enter register of donor information (edit)
+            </pre>";
+
+        });
+
+        Route::get('donor-edit/{id}', function ($id) {
+
+            return "<pre>
+                form have all donor data to update
+                button to go to {} with donor-id
+                * Taher *
+            </pre>";
 
         });
 

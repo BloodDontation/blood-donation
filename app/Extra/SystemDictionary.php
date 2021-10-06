@@ -17,6 +17,8 @@ class SystemDictionary {
             'dashboard'             =>  'Dashboard',
             'session'               =>  'Session',
 
+            'register-donor'        =>  'Register Donor',
+
         ],
 
         'ar'    =>  [
@@ -26,6 +28,8 @@ class SystemDictionary {
 
             'dashboard'             =>  'لوحة التحكم',
             'session'               =>  'تحويل',
+
+            'register-donor'        =>  'تسجيل المتبرع',
 
         ]
 
