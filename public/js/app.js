@@ -21243,7 +21243,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         status: null,
         diseases: [],
         has_green_shield: false,
-        last_travel_date: null
+        last_travel_date: null,
+        selected_time: null
       }),
       genders: [{
         key: 'male',
@@ -21300,6 +21301,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           };
         },
         onError: function onError() {}
+      });
+    }
+  },
+  computed: {
+    timings_for_select: function timings_for_select() {
+      var _this2 = this;
+
+      return Object.values(this.timings).map(function (x) {
+        return {
+          value: x.time,
+          name: "".concat(x.time, " ").concat(x.disabled ? '- ' + _this2.trans('not-available') : ''),
+          disabled: x.disabled
+        };
       });
     }
   }
@@ -27844,13 +27858,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]),  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_82, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_83, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.trans('time')), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"donor.city\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Multiselect, {
-    options: $props.timings,
+    modelValue: _ctx.donor.selected_time,
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+      return _ctx.donor.selected_time = $event;
+    }),
+    options: $options.timings_for_select,
+    label: "name",
+    trackBy: "name",
+    disabled: _ctx.isDisabled,
     searchable: true,
     "class": "w-full input input-bordered"
   }, null, 8
   /* PROPS */
-  , ["options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label class=\"label\" v-if=\"errors.city\">\n                            <span class=\"label-text-alt text-red-500\">\n                                {{errors.city}}\n                            </span>\n                        </label> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+  , ["modelValue", "options", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label class=\"label\" v-if=\"errors.city\">\n                            <span class=\"label-text-alt text-red-500\">\n                                {{errors.city}}\n                            </span>\n                        </label> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
       return _ctx.donor.has_green_shield = $event;
     }),
     type: "checkbox",
@@ -27862,7 +27883,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )]), $props.errors.has_green_shield ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_89, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors.has_green_shield), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_90, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[14] || (_cache[14] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.register && $options.register.apply($options, arguments);
     }, ["prevent"])),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn w-full", [_ctx.donor.processing ? 'loading' : '']]),

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Extra\MainTrait;
+use App\Models\Admin\Campaign;
 use App\Models\Disease;
 use App\Models\DiseasesHealthHistory;
 use App\Models\Donor;
@@ -17,15 +18,18 @@ class RegisterService {
 
     use MainTrait;
 
-    public function register_donor($donor, $donor_history, $diseases)
+    public function register_donor($donor, $selected_time, $donor_history, $diseases)
     {
 
         try
         {
 
-            $result = DB::transaction(function () use ($donor, $donor_history, $diseases) {
+            $result = DB::transaction(function () use ($donor, $selected_time, $donor_history, $diseases) {
 
-                $status = 1;
+
+                $current_campaign = Campaign::first();
+
+                $status = 0;
                 $reason_to_reject = [];
 
                 $donor['username']      = $donor['cpr'];
@@ -37,7 +41,7 @@ class RegisterService {
 
                 if ( $donor_age > 55 )
                 {
-                    $reason_to_reject[] = 'donor-age-more-than-55';
+                    $reason_to_reject[] = trans('donor-age-more-than-55');
                     $status = 2;
                 }
 
@@ -46,19 +50,32 @@ class RegisterService {
 
                 if ( $last_travel_period > 1 )
                 {
-                    $reason_to_reject[] = 'donor-last-travel-more-than-1-month';
+                    $reason_to_reject[] = trans('donor-last-travel-more-than-1-month');
                     $status = 2;
                 }
 
                 if ( $donor['gender'] != 'male' )
                 {
-                    $reason_to_reject[] = 'only-male-allowed-to-donate';
+                    $reason_to_reject[] = trans('only-male-allowed-to-donate');
                     $status = 2;
                 }
 
-                $donor['status']        = $status;
+                $donor['status'] = 1;
 
                 $new_donor = Donor::create($donor);
+
+                // add donor to capmiagn
+                $date_of_campaign = Carbon::parse($current_campaign->start_time)->toDateString();
+                $time = Carbon::parse("{$date_of_campaign} {$selected_time}");
+
+                DB::table('campaign_donors')->insert([
+
+                    "i_campaigns"   =>  1,
+                    "i_donors"      =>  $new_donor->id,
+                    "status"        =>  $status,
+                    "time"          =>  $selected_time == 'waiting-time' ? null : $time,
+
+                ]);
 
                 $donor_history['i_donors'] = $new_donor->id;
 
@@ -96,7 +113,7 @@ class RegisterService {
 
             }
 
-            return $this->return_toast_result(false, 'warning', trans('added-successfully', ['type' => trans('donor')]));
+            return $this->return_toast_result(false, 'success', trans('added-successfully', ['type' => trans('donor')]));
 
         }
         catch(Exception $ex)
