@@ -2859,6 +2859,18 @@ html {
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
 }
+.my-5 {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+}
+.my-20 {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+.my-16 {
+	margin-top: 4rem;
+	margin-bottom: 4rem;
+}
 .ml-3 {
 	margin-left: 0.75rem;
 }
@@ -3059,9 +3071,6 @@ html {
 }
 .w-52 {
 	width: 13rem;
-}
-.w-1\/2 {
-	width: 50%;
 }
 .w-36 {
 	width: 9rem;

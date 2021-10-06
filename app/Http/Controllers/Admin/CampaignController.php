@@ -139,12 +139,12 @@ class CampaignController extends Controller
             'start_time'            =>  ['required'],
             'end_time'              =>  ['required'],
             'total_donor'           =>  ['required', 'numeric', 'min:1'],
-            'donor_per_hour'        =>  ['required', 'numeric',],
+            'donor_per_period'      =>  ['required', 'numeric',],
             'logo'                  =>  ['mimes:jpeg,png,jpg','max:1024'],
 
         ]);
 
-        $new_campaign   = $request->only(['name', 'location', 'start_time', 'end_time', 'total_donor', 'donor_per_hour', 'status', 'registration_status']);
+        $new_campaign   = $request->only(['name', 'location', 'start_time', 'end_time', 'total_donor', 'donor_per_period', 'status', 'registration_status']);
 
         $logo           = $request->logo;
 
@@ -171,7 +171,7 @@ class CampaignController extends Controller
             'start_time'            =>  ['required'],
             'end_time'              =>  ['required'],
             'total_donor'           =>  ['required', 'numeric', 'min:1'],
-            'donor_per_hour'        =>  ['required', 'numeric',],
+            'donor_per_period'        =>  ['required', 'numeric',],
 
         ];
 
@@ -184,7 +184,7 @@ class CampaignController extends Controller
 
         $request->validate($validation_array);
 
-        $campaign   = $request->only(['id', 'name', 'location', 'start_time', 'end_time', 'total_donor', 'donor_per_hour', 'status', 'registration_status']);
+        $campaign   = $request->only(['id', 'name', 'location', 'start_time', 'end_time', 'total_donor', 'donor_per_period', 'status', 'registration_status']);
 
         $logo       = $request->logo;
 

@@ -15,7 +15,7 @@ class Campaign extends Model
 
     protected $table    =   'campaigns';
 
-    protected $fillable =   ['name','location','description','logo','status','total_donor','donor_per_hour','registration_status','i_societies', 'start_time', 'end_time',];
+    protected $fillable =   ['name','location','description','logo','status','total_donor','donor_per_period','registration_status','i_societies', 'start_time', 'end_time',];
 
     protected $hidden   =   ['created_at', 'updated_at'];
 

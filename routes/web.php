@@ -31,6 +31,15 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
     Route::post('register', [\App\Http\Controllers\RegisterDonorController::class, 'register'])->name('donor-register');
 
+    Route::get('cancel-registration', function() {
+
+        return "<pre>
+                cancel the registration by entering cpr,
+            </pre>
+        ";
+
+    });
+
     // ->middleware(['auth:sanctum', 'verified'])
 
     Route::prefix('admin')->group(function() {
@@ -65,6 +74,32 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
+        Route::get('donor-lists', function () {
+
+            return "<pre>
+                Listing donors and search and action to approve/reject
+            </pre>";
+
+        });
+
+        Route::get('donors-list-register', function () {
+
+            return "<pre>
+                Listing donors and search
+                button to enter register of donor information (edit)
+            </pre>";
+
+        });
+
+        Route::get('donor-edit/{id}', function ($id) {
+
+            return "<pre>
+                form have all donor data to update
+                button to go to {} with donor-id
+                * Taher *
+            </pre>";
+        });
+
         Route::prefix('plans/')->group(function() {
 
             Route::get('/', [\App\Http\Controllers\Admin\PlanController::class, 'index'])->name('admin-plan-index');
@@ -78,13 +113,12 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
-
     });
 
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
-    return Inertia::render('Dashboard');
+//     return Inertia::render('Dashboard');
 
-})->name('dashboard');
+// })->name('dashboard')
