@@ -366,6 +366,32 @@
 
                     </div>
 
+                    <div class="flex form-control w-full md:w-1/2 px-2">
+                        <label class="label">
+                            <span class="label-text required">
+                                {{trans('time')}}
+                            </span>
+                        </label>
+
+                        <div class="relative">
+
+                            <!-- v-model="donor.city" -->
+                            <Multiselect
+                                :options="timings"
+                                :searchable="true"
+                                class="w-full input input-bordered"
+                            ></Multiselect>
+
+                        </div>
+
+                        <!-- <label class="label" v-if="errors.city">
+                            <span class="label-text-alt text-red-500">
+                                {{errors.city}}
+                            </span>
+                        </label> -->
+
+                    </div>
+
                     <div class="flex form-control">
 
                         <label class="cursor-pointer label">
@@ -433,6 +459,8 @@
 
             current_campaign: Object,
 
+            timings: [],
+
         },
 
         components: {
@@ -469,12 +497,6 @@
 
 
                 }),
-
-                timing: [
-
-
-
-                ],
 
                 genders: [
                     {

@@ -21218,7 +21218,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     blood_groups: [],
     diseases: [],
     errors: [],
-    current_campaign: Object
+    current_campaign: Object,
+    timings: []
   },
   components: {
     datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -21244,7 +21245,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         has_green_shield: false,
         last_travel_date: null
       }),
-      timing: [],
       genders: [{
         key: 'male',
         name_en: 'Male',
@@ -27629,25 +27629,37 @@ var _hoisted_80 = {
   "class": "label-text-alt text-red-500"
 };
 var _hoisted_81 = {
-  "class": "flex form-control"
+  "class": "flex form-control w-full md:w-1/2 px-2"
 };
 var _hoisted_82 = {
-  "class": "cursor-pointer label"
+  "class": "label"
 };
 var _hoisted_83 = {
-  "class": "label-text ml-2"
+  "class": "label-text required"
 };
 var _hoisted_84 = {
+  "class": "relative"
+};
+var _hoisted_85 = {
+  "class": "flex form-control"
+};
+var _hoisted_86 = {
+  "class": "cursor-pointer label"
+};
+var _hoisted_87 = {
+  "class": "label-text ml-2"
+};
+var _hoisted_88 = {
   key: 0,
   "class": "label"
 };
-var _hoisted_85 = {
+var _hoisted_89 = {
   "class": "label-text-alt text-red-500"
 };
-var _hoisted_86 = {
+var _hoisted_90 = {
   "class": "flex w-full mt-4"
 };
-var _hoisted_87 = ["disabled"];
+var _hoisted_91 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("datepicker");
 
@@ -27829,7 +27841,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["modelValue"])]), $props.errors.last_travel_date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors.last_travel_date), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]),  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_82, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]),  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_82, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_83, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.trans('time')), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"donor.city\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Multiselect, {
+    options: $props.timings,
+    searchable: true,
+    "class": "w-full input input-bordered"
+  }, null, 8
+  /* PROPS */
+  , ["options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label class=\"label\" v-if=\"errors.city\">\n                            <span class=\"label-text-alt text-red-500\">\n                                {{errors.city}}\n                            </span>\n                        </label> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
       return _ctx.donor.has_green_shield = $event;
     }),
@@ -27837,11 +27857,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "checkbox"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.donor.has_green_shield]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_83, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.trans('has-green-shield')), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.donor.has_green_shield]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.trans('has-green-shield')), 1
   /* TEXT */
-  )]), $props.errors.has_green_shield ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_85, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors.has_green_shield), 1
+  )]), $props.errors.has_green_shield ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_89, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors.has_green_shield), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_90, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.register && $options.register.apply($options, arguments);
     }, ["prevent"])),
@@ -27849,7 +27869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: _ctx.donor.processing
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.trans('regiter')), 11
   /* TEXT, CLASS, PROPS */
-  , _hoisted_87)])])])]);
+  , _hoisted_91)])])])]);
 }
 
 /***/ }),

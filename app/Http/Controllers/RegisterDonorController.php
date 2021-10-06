@@ -40,23 +40,19 @@ class RegisterDonorController extends Controller
 
         $timings[] = trans('waiting-time');
 
-        dd($timings);
-
-        // foreach( $ )
-
-        dd($current_campaign->start_time, $current_campaign->donor_per_period);
-
         $data = [
 
-            'nationalities' => config('nationalities'),
+            'nationalities'     => config('nationalities'),
 
-            'cities'        => config('cities'),
+            'cities'            => config('cities'),
 
-            'blood_groups'  => config('blood_groups'),
+            'blood_groups'      => config('blood_groups'),
 
-            'diseases'      => Disease::get(),
+            'diseases'          => Disease::get(),
 
-            'current_campaign' => Campaign::first(),
+            'current_campaign'  => $current_campaign,
+
+            'timings'           => $timings,
 
         ];
 
