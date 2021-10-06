@@ -96,6 +96,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
                 button to go to {} with donor-id
                 * Taher *
             </pre>";
+        });
 
         Route::prefix('plans/')->group(function() {
 
@@ -110,7 +111,6 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
-
     });
 
 });
@@ -119,4 +119,4 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
 //     return Inertia::render('Dashboard');
 
-// })->name('dashboard');
+// })->name('dashboard')
