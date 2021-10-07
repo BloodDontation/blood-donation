@@ -42,7 +42,8 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
     // ->middleware(['auth:sanctum', 'verified'])
 
-    Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::prefix('admin')->group(function() {
+//    Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function() {
 
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin-dashboard');
 

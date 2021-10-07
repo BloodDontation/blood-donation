@@ -187,6 +187,10 @@ class StagesController extends Controller
                                 'i_stages'=>$stage_id,
                                 'start_time'=>date ('Y-m-d H:i:s', strtotime("now"))
                             ]);
+
+                            if($stage->is_exit){
+                                return "completed ";
+                            }
                             return "match ";
                         }
                     }
