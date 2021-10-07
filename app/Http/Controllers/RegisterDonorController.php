@@ -73,7 +73,7 @@ class RegisterDonorController extends Controller
 
             $available = $total_donor_per_period - $donor_count->count();
 
-            $timings[$time]['disabled'] = $available == 0 ? true : false;
+            $timings[$time]['disabled'] = $available <= 0 ? true : false;
 
 
         }
