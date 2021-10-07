@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,14 +25,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::prefix(LaravelLocalization::setLocale())->group(function() {
+Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
     // register
     Route::get('registration', [\App\Http\Controllers\RegisterDonorController::class, 'register_form'])->name('donor-register-form');
 
     Route::post('register', [\App\Http\Controllers\RegisterDonorController::class, 'register'])->name('donor-register');
 
-    Route::get('cancel-registration', function() {
+    Route::get('cancel-registration', function () {
 
         return "<pre>
                 cancel the registration by entering cpr,
@@ -42,12 +43,12 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
     // ->middleware(['auth:sanctum', 'verified'])
 
-    Route::prefix('admin')->group(function() {
+    Route::prefix('admin')->group(function () {
 //    Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function() {
 
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin-dashboard');
 
-        Route::prefix('campaign/')->group(function() {
+        Route::prefix('campaign/')->group(function () {
 
             Route::get('/', [\App\Http\Controllers\Admin\CampaignController::class, 'index'])->name('admin-campaigns-index');
 
@@ -61,7 +62,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
-        Route::prefix('stages/')->group(function() {
+        Route::prefix('stages/')->group(function () {
 
             Route::get('/', [\App\Http\Controllers\Admin\StagesController::class, 'index'])->name('admin-stages-index');
 
@@ -101,7 +102,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
             </pre>";
         });
 
-        Route::prefix('plans/')->group(function() {
+        Route::prefix('plans/')->group(function () {
 
             Route::get('/', [\App\Http\Controllers\Admin\PlanController::class, 'index'])->name('admin-plan-index');
 
@@ -114,6 +115,11 @@ Route::prefix(LaravelLocalization::setLocale())->group(function() {
 
         });
 
+        Route::prefix('donors/')->group(function () {
+            Route::get('/{cpr}/print', [\App\Http\Controllers\Admin\donorsController::class, 'print_form'])->name('admin-donors-print');
+
+
+        });
     });
 
 });
