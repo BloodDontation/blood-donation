@@ -73,12 +73,12 @@ class StagesService {
 
     }
 
-    public function get_stage_of_donor($plan_id, $term = '', $columns = ['*'])
+    public function get_stage_of_donor($donor_id, $term = '', $columns = ['*'])
     {
 
         try
         {
-            return Donor_stages::select($columns)->Donor($plan_id)->orderBy('position')->get();
+            return Donor_stages::select($columns)->Donor($donor_id)->orderBy('start_time')->get();
         }
         catch(Exception $ex)
         {

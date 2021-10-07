@@ -11,18 +11,18 @@ class Donor_stages extends Model
 
     protected $table    =   'donor_stages';
 
-    protected $fillable =   ['i_donors','i_plans','information','start_time','end_time'];
+    protected $fillable =   ['i_donors','i_stages','information','start_time','end_time'];
 
     protected $hidden   =   ['created_at', 'updated_at'];
 
 
     public function scopeDonor($query, $scope_id)
     {
-        return $query->where('i_donors',$scope_id)->join('stages', 'plan_stages.i_stages', '=', 'stages.id');
+        return $query->where('i_donors',$scope_id)->join('stages', 'donor_stages.i_stages', '=', 'stages.id');
     }
 
     public function stages()
     {
-        return $this->hasOne(Plans::class, 'i_stages');
+        return $this->hasOne(Stage::class, 'i_stages');
     }
 }
