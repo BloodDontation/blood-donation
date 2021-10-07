@@ -8,6 +8,7 @@ use App\Models\Admin\Donor_stages;
 use App\Models\Admin\Stage;
 use App\Models\Donor;
 use App\Services\PlanService;
+use App\Services\smsService;
 use App\Services\StagesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -20,11 +21,13 @@ class StagesController extends Controller
 
     private $StagesService;
     private $PlanService;
+    private $smsService;
 
-    public function __construct(StagesService $StagesService, PlanService $PlanService)
+    public function __construct(StagesService $StagesService, PlanService $PlanService, smsService $smsService)
     {
         $this->StagesService = $StagesService;
         $this->PlanService = $PlanService;
+        $this->smsService = $smsService;
     }
 
     public function index(Request $request)
@@ -140,14 +143,14 @@ class StagesController extends Controller
         $cpr = $request->input("cpr");
         $stage_id = $request->input("stage_id");
 
-        $stage=Stage::find($stage_id);
+        $stage = Stage::find($stage_id);
         $donor = Donor::where('cpr', $cpr)->first();
         $plans = $this->PlanService->get_all_Plans_with_search(1);
-        $donor_stage = $this->StagesService->get_stage_of_donor($donor->id)->where('type','Required')->toArray();
+        $donor_stage = $this->StagesService->get_stage_of_donor($donor->id)->where('type', 'Required')->toArray();
         $donor_stage = array_values($donor_stage);
 
-        foreach ($plans  as $plan) {
-            $plan_stage = $this->PlanService->get_stage_of_plan($plan->id)->where('type','Required')->toArray();
+        foreach ($plans as $plan) {
+            $plan_stage = $this->PlanService->get_stage_of_plan($plan->id)->where('type', 'Required')->toArray();
             $plan_stage = array_values($plan_stage);
 //            return dd($donor_stage);
             $length = count($donor_stage);
@@ -158,43 +161,49 @@ class StagesController extends Controller
                         break;
                     }
                 } elseif (isset($stage->type) && $i == $length) {
-                    if(isset($stage->type) &&$stage->type=="Optioninal"){
-                        if($length!=0){
-                            $last=Donor_stages::where('i_donors',$donor->id)->orderBy('created_at', 'desc')->first();
-                            $last->end_time=date ('Y-m-d H:i:s', strtotime("now"));
+                    if (isset($stage->type) && $stage->type == "Optioninal") {
+                        if ($length != 0) {
+                            $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
+                            $last->end_time = date('Y-m-d H:i:s', strtotime("now"));
                             $last->save();
                         }
 
                         Donor_stages::create([
-                          'i_donors'=>$donor->id,
-                          'i_stages'=>$stage_id,
-                          'start_time'=> date ('Y-m-d H:i:s', strtotime("now"))
+                            'i_donors' => $donor->id,
+                            'i_stages' => $stage_id,
+                            'start_time' => date('Y-m-d H:i:s', strtotime("now"))
                         ]);
                         return "direct insert";
-                    }else{
+                    } else {
                         if ($plan_stage[$i]['id'] != $stage_id) {
                             break;
                             $match = false;
                         } else {
-                            if($length!=0){
-                                $last=Donor_stages::where('i_donors',$donor->id)->orderBy('created_at', 'desc')->first();
-                                $last->end_time=date ('Y-m-d H:i:s', strtotime("now"));
+                            if ($length != 0) {
+                                $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
+                                $last->end_time = date('Y-m-d H:i:s', strtotime("now"));
                                 $last->save();
                             }
 
                             Donor_stages::create([
-                                'i_donors'=>$donor->id,
-                                'i_stages'=>$stage_id,
-                                'start_time'=>date ('Y-m-d H:i:s', strtotime("now"))
+                                'i_donors' => $donor->id,
+                                'i_stages' => $stage_id,
+                                'start_time' => date('Y-m-d H:i:s', strtotime("now"))
                             ]);
 
-                            if($stage->is_exit){
+                            if ($stage->is_exit) {
+                                $this->smsService->send_sms($donor, 'exit_message', [
+                                    'name'=>$donor->name
+                                ]);
+
+                                $this->smsService->send_sms($donor, 'quality_form', [
+                                    'name'=>$donor->name
+                                ]);
                                 return "completed ";
                             }
                             return "match ";
                         }
                     }
-
 
 
                 }
