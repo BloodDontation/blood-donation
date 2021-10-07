@@ -19,6 +19,8 @@ class SystemDictionary {
 
             'register-donor'        =>  'Register Donor',
 
+            'not-available'         =>  'Not Available',
+
         ],
 
         'ar'    =>  [
@@ -30,6 +32,8 @@ class SystemDictionary {
             'session'               =>  'تحويل',
 
             'register-donor'        =>  'تسجيل المتبرع',
+
+            'not-available'         =>  'غير متوفر'
 
         ]
 

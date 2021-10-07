@@ -377,7 +377,11 @@
 
                             <!-- v-model="donor.city" -->
                             <Multiselect
-                                :options="timings"
+                                v-model="donor.selected_time"
+                                :options="timings_for_select"
+                                label="name"
+                                trackBy="name"
+                                :disabled="isDisabled"
                                 :searchable="true"
                                 class="w-full input input-bordered"
                             ></Multiselect>
@@ -495,6 +499,8 @@
                     has_green_shield: false,
                     last_travel_date: null,
 
+                    selected_time: null,
+
 
                 }),
 
@@ -580,6 +586,24 @@
                     onError: () => {
 
                     },
+
+                });
+
+            },
+
+        },
+
+        computed: {
+
+            timings_for_select: function() {
+
+                return Object.values(this.timings).map( x => {
+
+                    return {
+                        value: x.time,
+                        name: `${x.time} ${x.disabled ? '- ' + this.trans('not-available') : ''}`,
+                        disabled: x.disabled,
+                    }
 
                 });
 
