@@ -55,9 +55,9 @@ class donorsController extends Controller
                             </td>
                         </tr>
                         <tr>
-                            <td>Date of Birth: </td>
+                            <td>Date of Birth: <?php echo $donor->birth_date; ?> </td>
                             <td></td>
-                            <td>Gender: ذكر</td>
+                            <td>Gender: Male</td>
                         </tr>
                         </tbody>
                     </table>
