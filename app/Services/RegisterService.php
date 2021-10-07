@@ -48,9 +48,9 @@ class RegisterService {
                 // last travel > 1 month
                 $last_travel_period = Carbon::now()->diffInMonths($donor_history['last_travel_date']);
 
-                if ( $last_travel_period > 1 )
+                if ( $last_travel_period <= 1 )
                 {
-                    $reason_to_reject[] = trans('donor-last-travel-more-than-1-month');
+                    $reason_to_reject[] = trans('donor-last-travel-less-than-1-month');
                     $status = 2;
                 }
 
