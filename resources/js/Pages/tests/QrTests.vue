@@ -2,55 +2,93 @@
     <div>
         <p class="decode-result">Last result: <b>{{ result }}</b></p>
 
-
         <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
-            <div v-show="showScanConfirmation" class="scan-confirmation">
-                <img :src="$withBase('/checkmark.svg')" alt="Checkmark" width="128px" />
+            <div v-if="validationSuccess" class="validation-success">
+                This is a URL
+            </div>
+
+            <div v-if="validationFailure" class="validation-failure">
+                This is NOT a URL!
+            </div>
+
+            <div v-if="validationPending" class="validation-pending">
+                Long validation in progress...
             </div>
         </qrcode-stream>
     </div>
+    <QRCodeVue3
+        value="987987987"
+        :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'L' }"
+        :dotsOptions="{ type: 'square', color: '#000000', gradient: null }"
+        :cornersSquareOptions="{ type: 'square', color: '#000000' }"
+    />
 </template>
 
 <script>
 
-import { QrcodeStream } from 'qrcode-reader-vue3'
+import {QrcodeStream} from 'vue3-qrcode-reader';
+import QRCodeVue3 from "qrcode-vue3";
+
+
 export default {
 
-    components: { QrcodeStream },
+    components: { QrcodeStream, QRCodeVue3},
+
 
     data () {
         return {
+            isValid: undefined,
             camera: 'auto',
             result: null,
-            showScanConfirmation: false
+        }
+    },
+
+    computed: {
+        validationPending () {
+            return this.isValid === undefined
+                && this.camera === 'off'
+        },
+
+        validationSuccess () {
+            return this.isValid === true
+        },
+
+        validationFailure () {
+            return this.isValid === false
         }
     },
 
     methods: {
 
-        async onInit (promise) {
-            try {
-                await promise
-            } catch (e) {
-                console.error(e)
-            } finally {
-                this.showScanConfirmation = this.camera === "off"
-            }
+        onInit (promise) {
+            promise
+                .catch(console.error)
+                .then(this.resetValidationState)
+        },
+
+        resetValidationState () {
+            this.isValid = undefined
         },
 
         async onDecode (content) {
             this.result = content
+            this.turnCameraOff()
 
-            this.pause()
-            await this.timeout(500)
-            this.unpause()
+            // pretend it's taking really long
+            await this.timeout(3000)
+            this.isValid = content.startsWith('http')
+
+            // some more delay, so users have time to read the message
+            await this.timeout(2000)
+
+            this.turnCameraOn()
         },
 
-        unpause () {
+        turnCameraOn () {
             this.camera = 'auto'
         },
 
-        pause () {
+        turnCameraOff () {
             this.camera = 'off'
         },
 
@@ -64,15 +102,27 @@ export default {
 </script>
 
 <style scoped>
-.scan-confirmation {
+.validation-success,
+.validation-failure,
+.validation-pending {
     position: absolute;
     width: 100%;
     height: 100%;
 
     background-color: rgba(255, 255, 255, .8);
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 10px;
 
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: center;
+}
+.validation-success {
+    color: green;
+}
+.validation-failure {
+    color: red;
 }
 </style>

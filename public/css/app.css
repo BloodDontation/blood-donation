@@ -2087,6 +2087,16 @@ html {
 	pointer-events: auto;
 	visibility: visible;
 }
+.progress {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: .5rem;
+	border-radius: var(--rounded-box,1rem);
+}
 .select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -2193,6 +2203,10 @@ html {
 	outline: 2px solid transparent;
 	outline-offset: 2px;
 	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsla(var(--bc)/.2);
+}
+.toggle:focus {
+	outline: 2px solid transparent;
+	outline-offset: 2px;
 }
 .avatar-group .avatar {
 	--tw-border-opacity: 1;
@@ -2575,6 +2589,21 @@ html {
 	--tw-scale-y: 1;
 	--tw-translate-y: 0px;
 }
+.progress::-moz-progress-bar {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--n)/var(--tw-bg-opacity,1));
+}
+.progress::-webkit-progress-bar {
+	--tw-bg-opacity: 1;
+	--tw-bg-opacity: 0.2;
+	background-color: hsla(var(--n)/var(--tw-bg-opacity,1));
+	border-radius: var(--rounded-box,1rem);
+}
+.progress::-webkit-progress-value {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--nf)/var(--tw-bg-opacity,1));
+	border-radius: var(--rounded-box,1rem);
+}
 @-webkit-keyframes radiomark {
 
 	0% {
@@ -2717,6 +2746,48 @@ html {
 	--tw-placeholder-opacity: 1;
 	--tw-placeholder-opacity: 0.2;
 	color: hsla(var(--bc)/var(--tw-placeholder-opacity,1));
+}
+.toggle {
+	--chkbg: hsla(var(--bc)/.2);
+	--focus-shadow: 0 0 0;
+	--handleoffset: 1.5rem;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	--tw-bg-opacity: 1;
+	--tw-bg-opacity: 0.2;
+	background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
+	--tw-border-opacity: 1;
+	--tw-border-opacity: 0.2;
+	border-color: hsla(var(--bc)/var(--tw-border-opacity,1));
+	border-width: 1px;
+	cursor: pointer;
+	height: 1.5rem;
+	width: 3rem;
+	transition-timing-function: cubic-bezier(.4,0,.2,1);
+	transition-duration: .3s;
+	border-radius: var(--rounded-badge,1.9rem);
+	transition: background,box-shadow var(--animation-input,.2s) ease-in-out;
+	box-shadow: calc(var(--handleoffset)*-1) 0 0 2px hsl(var(--b1)) inset,0 0 0 2px hsl(var(--b1)) inset,var(--focus-shadow);
+}
+.toggle:focus-visible {
+	--focus-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--bc));
+}
+.toggle:checked {
+	--chkbg: hsl(var(--bc));
+	--tw-bg-opacity: 1;
+	--tw-border-opacity: 1;
+	box-shadow: var(--handleoffset) 0 0 2px hsl(var(--b1)) inset,0 0 0 2px hsl(var(--b1)) inset,var(--focus-shadow);
+}
+[dir=rtl] .toggle:checked {
+	box-shadow: calc(var(--handleoffset)*1) 0 0 2px hsl(var(--b1)) inset,0 0 0 2px hsl(var(--b1)) inset,var(--focus-shadow);
+}
+.toggle:disabled {
+	--tw-bg-opacity: 1;
+	--tw-bg-opacity: 0.2;
+	background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
+	border-color: transparent;
+	cursor: not-allowed;
 }
 .prose {
 	color: inherit;
