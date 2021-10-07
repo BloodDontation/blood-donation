@@ -107,7 +107,7 @@ class RegisterDonorController extends Controller
 
             "name"              => ['required'],
             "phone"             => ['required'],
-            "email"             => ['required', 'unique:donors,email'],
+            "email"             => ['nullable', 'unique:donors,email'],
             "cpr"               => ['required', 'unique:donors,cpr'],
             "birth_date"        => ['required'],
             "city"              => ['required'],
