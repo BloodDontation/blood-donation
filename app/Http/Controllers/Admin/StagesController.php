@@ -162,23 +162,8 @@ class StagesController extends Controller
                     }
                 } elseif (isset($stage->type) && $i == $length) {
                     if (isset($stage->type) && $stage->type == "Optioninal") {
-                        if ($length != 0) {
-                            $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
-                            $last->end_time = date('Y-m-d H:i:s', strtotime("now"));
-                            $last->save();
-                        }
-
-                        Donor_stages::create([
-                            'i_donors' => $donor->id,
-                            'i_stages' => $stage_id,
-                            'start_time' => date('Y-m-d H:i:s', strtotime("now"))
-                        ]);
-                        return "direct insert";
-                    } else {
-                        if ($plan_stage[$i]['id'] != $stage_id) {
-                            break;
-                            $match = false;
-                        } else {
+                        $check_exist = Donor_stages::where("i_donors", $donor->id)->where("i_stages", $stage_id)->get()->toArray();
+                        if (count($check_exist) == 0) {
                             if ($length != 0) {
                                 $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
                                 $last->end_time = date('Y-m-d H:i:s', strtotime("now"));
@@ -190,19 +175,40 @@ class StagesController extends Controller
                                 'i_stages' => $stage_id,
                                 'start_time' => date('Y-m-d H:i:s', strtotime("now"))
                             ]);
-
-                            if ($stage->is_exit) {
-                                $this->smsService->send_sms($donor, 'exit_message', [
-                                    'name'=>$donor->name
-                                ]);
-
-                                $this->smsService->send_sms($donor, 'quality_form', [
-                                    'name'=>$donor->name
-                                ]);
-                                return "completed ";
-                            }
-                            return "match ";
+                            return "direct insert";
                         }
+
+                    } else {
+                        if (count($plan_stage) < count($donor_stage)) {
+                            if ($plan_stage[$i]['id'] != $stage_id) {
+                                break;
+                            } else {
+                                if ($length != 0) {
+                                    $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
+                                    $last->end_time = date('Y-m-d H:i:s', strtotime("now"));
+                                    $last->save();
+                                }
+
+                                Donor_stages::create([
+                                    'i_donors' => $donor->id,
+                                    'i_stages' => $stage_id,
+                                    'start_time' => date('Y-m-d H:i:s', strtotime("now"))
+                                ]);
+
+                                if ($stage->is_exit) {
+                                    $this->smsService->send_sms($donor, 'exit_message', [
+                                        'name' => $donor->name
+                                    ]);
+
+                                    $this->smsService->send_sms($donor, 'quality_form', [
+                                        'name' => $donor->name
+                                    ]);
+                                    return "completed ";
+                                }
+                                return "match ";
+                            }
+                        }
+
                     }
 
 
