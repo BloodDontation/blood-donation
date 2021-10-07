@@ -33,6 +33,7 @@ class RegisterService {
                 $reason_to_reject = [];
 
                 $donor['username']      = $donor['cpr'];
+                $donor['email']         = $donor['cpr'];
                 $donor['birth_date']    = Carbon::parse($donor['birth_date'])->toDateTimeLocalString();
 
                 $donor_age = Carbon::parse($donor['birth_date'])->age;
@@ -48,9 +49,10 @@ class RegisterService {
                 // last travel > 1 month
                 $last_travel_period = Carbon::now()->diffInMonths($donor_history['last_travel_date']);
 
+
                 if ( $last_travel_period <= 1 )
                 {
-                    $reason_to_reject[] = trans('donor-last-travel-less-than-1-month');
+                    $reason_to_reject[] = trans('donor-last-travel-more-than-1-month');
                     $status = 2;
                 }
 
@@ -66,7 +68,14 @@ class RegisterService {
 
                 // add donor to capmiagn
                 $date_of_campaign = Carbon::parse($current_campaign->start_time)->toDateString();
-                $time = Carbon::parse("{$date_of_campaign} {$selected_time}");
+                try
+                {
+                    $time = Carbon::parse("{$date_of_campaign} {$selected_time}");
+                }
+                catch(Exception $ex)
+                {
+                    $time = null;
+                }
 
                 DB::table('campaign_donors')->insert([
 
@@ -83,6 +92,8 @@ class RegisterService {
 
                 foreach ( $diseases as $index => $disease )
                 {
+
+                    if ( gettype($disease) != 'integer') continue;
 
                     $diseases_to_insert = [
 
