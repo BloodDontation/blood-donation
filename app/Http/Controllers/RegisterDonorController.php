@@ -71,6 +71,7 @@ class RegisterDonorController extends Controller
         foreach ( $all_donors_in_campaign as $time => $donor_count )
         {
 
+            // time must be in generated list & database
             if ( isset($timings['time']) )
             {
 
