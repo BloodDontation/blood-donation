@@ -71,14 +71,18 @@ class RegisterDonorController extends Controller
         foreach ( $all_donors_in_campaign as $time => $donor_count )
         {
 
-            $available = $total_donor_per_period - $donor_count->count();
+            if ( isset($timings['time']) )
+            {
 
-            $timings[$time]['disabled'] = $available <= 0 ? true : false;
+                $available = $total_donor_per_period - $donor_count->count();
 
+                $timings[$time]['disabled'] = $available <= 0 ? true : false;
+
+            }
 
         }
 
-        // dd($timings);
+        dd($timings);
 
         $data = [
 
