@@ -179,7 +179,7 @@ class StagesController extends Controller
                         }
 
                     } else {
-                        if (count($plan_stage) < count($donor_stage)) {
+                        if (count($plan_stage) >= count($donor_stage)) {
                             if ($plan_stage[$i]['id'] != $stage_id) {
                                 break;
                             } else {
