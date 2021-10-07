@@ -82,8 +82,6 @@ class RegisterDonorController extends Controller
 
         }
 
-        dd($timings);
-
         $data = [
 
             'nationalities'     => config('nationalities'),
