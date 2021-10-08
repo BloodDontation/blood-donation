@@ -66,7 +66,7 @@
                             <input
                                 v-model="donor.cpr"
                                 :class="[ errors.cpr ? 'input-error' : 'input-primary' ]"
-                                type="number" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered">
 
                         </div>
 

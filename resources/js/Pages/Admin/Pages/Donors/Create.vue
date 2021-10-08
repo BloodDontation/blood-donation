@@ -83,7 +83,7 @@
                             <input
                                 v-model="donor.cpr"
                                 :class="[ errors.cpr ? 'input-error' : 'input-primary' ]"
-                                type="number" class="w-full input input-bordered" id="cpr">
+                                type="text" class="w-full input input-bordered" id="cpr">
 
                         </div>
 
