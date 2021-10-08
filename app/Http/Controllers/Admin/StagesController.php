@@ -156,13 +156,17 @@ class StagesController extends Controller
             $length = count($donor_stage);
             $match = true;
             for ($i = 0; $i <= $length; $i++) {
+                $check_exist = Donor_stages::where("i_donors", $donor->id)->where("i_stages", $stage_id)->get()->toArray();
+                if (count($check_exist) != 0) {
+                    break 2;
+                }
+
                 if ($i < $length) {
                     if ($plan_stage[$i]['id'] != $donor_stage[$i]['id']) {
                         break;
                     }
                 } elseif (isset($stage->type) && $i == $length) {
                     if (isset($stage->type) && $stage->type == "Optioninal") {
-                        $check_exist = Donor_stages::where("i_donors", $donor->id)->where("i_stages", $stage_id)->get()->toArray();
                         if (count($check_exist) == 0) {
                             if ($length != 0) {
                                 $last = Donor_stages::where('i_donors', $donor->id)->orderBy('created_at', 'desc')->first();
@@ -175,7 +179,7 @@ class StagesController extends Controller
                                 'i_stages' => $stage_id,
                                 'start_time' => date('Y-m-d H:i:s', strtotime("now"))
                             ]);
-                            return "direct insert";
+                            return "Inserted";
                         }
 
                     } else {
@@ -203,9 +207,9 @@ class StagesController extends Controller
                                     $this->smsService->send_sms($donor, 'quality_form', [
                                         'name' => $donor->name
                                     ]);
-                                    return "completed ";
+                                    return "Completed";
                                 }
-                                return "match ";
+                                return "Inserted";
                             }
                         }
 
@@ -217,7 +221,7 @@ class StagesController extends Controller
             }
 
         }
-        return "exit";
+        return "Exit";
     }
 
 
