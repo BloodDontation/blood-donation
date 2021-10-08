@@ -5,30 +5,44 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class donorsController extends Controller
 {
     //
-    public function print_form(Request $request,$cpr){
+    public function print_form(Request $request, $cpr)
+    {
 
 
-        $donor=Donor::where('cpr',$cpr)->first();
+        $donor = Donor::where('cpr', $cpr)->first();
 //        return dd($donor);
 
         echo "";
 
         {
 
-            if(isset($donor))
-            {
+            if (isset($donor)) {
                 $thename = $donor->name;
                 $mobile = $donor->phone;
 
 
                 ?>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <style>
+                    @media print {
+                        .pagebreak {
+                            page-break-before: always;
+                        }
 
+                        /* page-break-after works, as well */
+                    }
+                    @page {
+                        size: auto;   /* auto is the initial value */
+                        margin-top: 30px;  /* this affects the margin in the printer settings */
+                        margin-bottom: 0;  /* this affects the margin in the printer settings */
+                    }
+                </style>
                 <center>
                     <h1>حملة الرسول الأعظم (ص) للتبرع بالدم 14</h1>
 
@@ -42,7 +56,7 @@ class donorsController extends Controller
                         <tr>
                             <td colspan=2>
                                 <?php
-                                echo "<div><span style=\"font-size:12px;\"><STRONG>CPR NUMBER: ".$cpr."</STRONG></span></div>";
+                                echo "<div><span style=\"font-size:12px;\"><STRONG>CPR NUMBER: " . $cpr . "</STRONG></span></div>";
                                 ?>
                             </td>
                             <td>Mobile Number: <?php echo $mobile; ?></td>
@@ -50,7 +64,7 @@ class donorsController extends Controller
                         <tr>
                             <td colspan=3>
                                 <?php
-                                echo "<div><span style=\"font-size:12px;\"><STRONG>NAME : ".$thename."</STRONG></span></div>";
+                                echo "<div><span style=\"font-size:12px;\"><STRONG>NAME : " . $thename . "</STRONG></span></div>";
                                 ?>
                             </td>
                         </tr>
@@ -64,10 +78,10 @@ class donorsController extends Controller
                     <BR>
                     <STRONG style="font-size:12px;">Physical Examiation</STRONG>
                     <div class="well" style="background-color: white;">
-                        <table  class="table" style="font-size:10px;">
+                        <table class="table" style="font-size:10px;">
                             <tbody>
                             <tr>
-                                <td style=" border: none;">Weight: </td>
+                                <td style=" border: none;">Weight:</td>
                                 <td style=" border: none;">BP:</td>
                                 <td style=" border: none;text-align: center;">Pulse Rate:</td>
                             </tr>
@@ -77,17 +91,19 @@ class donorsController extends Controller
                                 <td style=" border: none;">No</td>
                             </tr>
                             <tr style="padding:0px;">
-                                <td colspan=3 style="padding:0px;"><center>Staff intial:</center></td>
+                                <td colspan=3 style="padding:0px;">
+                                    <center>Staff intial:</center>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <STRONG style="font-size:12px;">Hb & BG</STRONG>
                     <div class="well" style="background-color: white;">
-                        <table  class="table" style="font-size:10px;">
+                        <table class="table" style="font-size:10px;">
                             <tbody>
                             <tr>
-                                <td style=" border: none;">BG: </td>
+                                <td style=" border: none;">BG:</td>
                                 <td style=" border: none;">Hb:</td>
                                 <td style=" border: none;"></td>
                             </tr>
@@ -102,7 +118,9 @@ class donorsController extends Controller
                                 <td style=" border: none;">Negetive</td>
                             </tr>
                             <tr style="padding:0px;">
-                                <td colspan=3 style="padding:0px;"><center>Staff intial:</center></td>
+                                <td colspan=3 style="padding:0px;">
+                                    <center>Staff intial:</center>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -110,31 +128,47 @@ class donorsController extends Controller
 
                     <STRONG style="font-size:12px;">BAG Preparation</STRONG>
                     <div class="well" style="background-color: white;">
-                        <table  class="table" style="font-size:10px;">
+                        <table class="table" style="font-size:10px;">
                             <tbody>
                             <tr>
-                                <td style=" border: none;">Donor No.: </td>
+                                <td style=" border: none;">Donor No.:</td>
                                 <td style=" border: none;">Tag No.:</td>
                                 <td style=" border: none;"></td>
                             </tr style="padding:0px;">
-                            <td colspan=3 style="padding:0px;"><center>Staff intial:</center></td>
+                            <td colspan=3 style="padding:0px;">
+                                <center>Staff intial:</center>
+                            </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <br/><br/>
                 </div>
+                <div class="pagebreak">
+                    <div class="visible-print text-center">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <?php echo QrCode::size(250)->generate($cpr);
+                        ?>
+                        <br>
+                        <center>
+                            <h3>CPR:
+                                <?php echo $cpr;
+                                ?>
+                            </h3>
 
-
+                        </center>
+                    </div>
+                </div>
 
 
                 <?php
                 echo "";
                 echo "<center><input type=\"submit\" onclick=\"window.print()\" class=\"btn-lg btn-success hidden-print\" value=\"طباعة البيانات\"><BR><BR>";
                 echo "";
-            }
-            else
-            {
+            } else {
                 echo "error occured";
             }
 
