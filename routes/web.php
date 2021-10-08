@@ -74,6 +74,8 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
             Route::get('/insert-donor', [\App\Http\Controllers\Admin\StagesController::class, 'interStage'])->name('admin-insert-donor-store');
 
+            Route::get('/{id}/stage-qr-scanner', [\App\Http\Controllers\Admin\StagesController::class, 'StageScannerPage'])->name('stage-qr-scanner');
+
         });
 
         Route::prefix('donors')->group(function() {

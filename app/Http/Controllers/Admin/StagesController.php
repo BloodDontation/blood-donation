@@ -224,5 +224,20 @@ class StagesController extends Controller
         return "Exit";
     }
 
+    public function StageScannerPage($id)
+    {
+        $stage = Stage::where('id', $id)->first();
+
+        if ($stage) {
+            $data = [
+                'id' => $id,
+                'name' => $stage->name
+            ];
+            return Inertia::render('Admin/Pages/Stages/StageScanner', $data);
+        } else {
+            return ('error');
+        }
+    }
+
 
 }
