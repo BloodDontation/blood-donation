@@ -20,9 +20,9 @@
 
                     <div class="my-6">
 
-                        <!-- <a :href="route('admin-donors-create')" class="btn">
+                        <a :href="route('admin-register-form')" class="btn" target="_blank">
                             {{trans('add')}}
-                        </a> -->
+                        </a>
 
                     </div>
 
@@ -91,6 +91,7 @@
                                     <th class="px-4 py-3">{{trans('status')}}</th>
 
                                     <th class="px-4 py-3 text-center w-32"></th>
+                                    <th class="px-4 py-3 text-center w-32"></th>
 
                                 </tr>
 
@@ -127,6 +128,13 @@
 
                                         </div>
 
+                                    </td>
+
+                                    <td class="px-4 py-3">
+
+                                        <a :href="route('admin-donors-print',donor.cpr)" target="_blank" class="btn">
+                                            {{trans('Print')}}
+                                        </a>
                                     </td>
 
                                     <td>

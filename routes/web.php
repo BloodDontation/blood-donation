@@ -78,13 +78,13 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
         });
 
-        Route::prefix('donors')->group(function() {
-
-            Route::get('/', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'index'])->name('admin-donors-index');
-
-            Route::post('/update-status', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'update_status'])->name('admin-donors-update-status');
-
-        });
+//        Route::prefix('donors')->group(function() {
+//
+//            Route::get('/', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'index'])->name('admin-donors-index');
+//
+//            Route::post('/update-status', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'update_status'])->name('admin-donors-update-status');
+//
+//        });
 
         Route::get('donor-lists', function () {
 
@@ -126,6 +126,11 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
         });
 
         Route::prefix('donors/')->group(function () {
+
+            Route::get('/', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'index'])->name('admin-donors-index');
+
+            Route::post('/update-status', [\App\Http\Controllers\Admin\CampaignDonorController::class, 'update_status'])->name('admin-donors-update-status');
+
 
             Route::get('/{cpr}/print', [\App\Http\Controllers\Admin\donorsController::class, 'print_form'])->name('admin-donors-print');
 

@@ -29,6 +29,7 @@
     "dependencies": {
         "@vueform/multiselect": "^2.2.0",
         "daisyui": "^1.14.1",
+        "jquery": "^3.6.0",
         "moment": "^2.29.1",
         "mosha-vue-toastify": "^1.0.23",
         "qrcode-vue3": "^1.4.17",
