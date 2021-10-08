@@ -28,6 +28,40 @@
 
                 </div>
 
+                <div class="flex w-full mb-4">
+
+                    <div class="relative w-full">
+
+                        <input
+                            type="text"
+                            :placeholder="placeholder"
+                            v-model="term"
+                            class="w-full pr-16 input input-primary input-bordered"
+                        >
+
+                        <div class="btn-group absolute top-0 right-0">
+
+                            <button @click.prevent="search_donors"
+                                class="btn rounded-l-none">
+
+                                {{trans('search')}}
+
+                            </button>
+
+                            <button @click="clear_search"
+                                class="btn btn-error">
+
+                                {{trans('clear')}}
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
                 <div class="whitespace-nowrap overflow-x-auto mb-12">
 
                     <table class="table w-full">
@@ -211,6 +245,24 @@
                     },
 
                 })
+
+            },
+
+            search_donors: function()
+            {
+
+                this.$inertia.replace(route('admin-donors-index', {
+                    term: this.term,
+                }));
+
+            },
+
+            clear_search: function()
+            {
+
+                this.$inertia.replace(route('admin-donors-index', {
+                    term: '',
+                }));
 
             }
 

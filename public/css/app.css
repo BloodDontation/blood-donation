@@ -1949,6 +1949,10 @@ html {
 		transform: rotate(1turn);
 	}
 }
+.btn-group {
+	display: flex;
+	flex-wrap: wrap;
+}
 .btn-group>input[type=radio].btn {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -3452,6 +3456,10 @@ html {
 	border-top-right-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
+.rounded-l-none {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
 .rounded-tr-lg {
 	border-top-right-radius: 0.5rem;
 }
@@ -3690,6 +3698,9 @@ html {
 }
 .pl-16 {
 	padding-left: 4rem;
+}
+.pr-16 {
+	padding-right: 4rem;
 }
 .text-left {
 	text-align: left;
