@@ -496,7 +496,7 @@
 
                     diseases: [],
 
-                    has_green_shield: false,
+                    has_green_shield: true,
                     last_travel_date: null,
 
                     selected_time: null,
@@ -509,11 +509,6 @@
                         key: 'male',
                         name_en: 'Male',
                         name_ar: 'ذكر'
-                    },
-                    {
-                        key: 'female',
-                        name_en: 'Female',
-                        name_ar: 'مؤنث'
                     },
                 ]
 
@@ -560,7 +555,7 @@
 
                     onSuccess: () => {
 
-                        this.donor = {
+                        this.donor = this.$inertia.form({
                             username: null,
                             // password: null,
                             name: null,
@@ -579,7 +574,7 @@
 
                             has_green_shield: false,
                             last_travel_date: null,
-                        };
+                        });
 
                     },
 

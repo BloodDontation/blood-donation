@@ -4,24 +4,64 @@ namespace App\Services;
 
 use App\Extra\MainTrait;
 use App\Models\Admin\Campaign;
+use App\Models\Donor;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class CampaignService {
+class DonorService {
 
     use MainTrait;
 
-    public function get_all_campaigns_with_search($society_id, $term = '', $columns = ['*'])
+    public function get_all_donors_with_search($term = '', $columns = ['*'])
     {
 
         try
         {
-            return Campaign::select($columns)->society($society_id)->paginate(10);
+
+            return Donor::select($columns)->when($term != null, function($query) use ($term) {
+
+                return $query->where('name', 'like', "%{$term}%")
+                ->orWhere('cpr', 'like', "%{$term}%")
+                ->orWhere('phone', 'like', "%{$term}%");
+
+            })
+            ->with([
+                'campaign_donor' => function($query) {
+
+                    return $query->select(['campaign_donors.time', 'campaign_donors.status']);
+
+                },
+            ])
+            ->orderBy('id', 'desc')
+            ->get();
+
         }
         catch(Exception $ex)
         {
             return 'error';
         }
+
+    }
+
+    public function update_campaign_donor_status($donor_id, $status)
+    {
+
+        try
+        {
+
+            DB::table('campaign_donors')->where('i_campaigns', 1)->where('i_donors', $donor_id)->update([
+                'status' => $status
+            ]);
+
+            return $this->return_toast_result(true,  'success', trans('updated-successfully', ['type' => trans('status')]));
+
+        }
+        catch(Exception $ex)
+        {
+            return $this->return_toast_result(false,  'danger', trans('general.something-error'));
+        }
+
 
     }
 
@@ -41,7 +81,7 @@ class CampaignService {
             if ( $logo )
             {
 
-                $logo_path                      = (new MediaUploadService())->upload_new_file($logo, 'campaigns');
+                $logo_path                      = (new MediaUploadService())->upload_new_file($logo, 'donors');
 
                 $new_campaign['logo']           = $logo_path;
 
@@ -86,7 +126,7 @@ class CampaignService {
 
                 // todo: delete old logo
 
-                $logo_path                      = (new MediaUploadService())->upload_new_file($logo, 'campaigns');
+                $logo_path                      = (new MediaUploadService())->upload_new_file($logo, 'donors');
 
                 $campaign['logo']               = $logo_path;
 
