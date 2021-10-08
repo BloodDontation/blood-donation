@@ -17,7 +17,6 @@
             </div> -->
 
 
-
             <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                 <br>
 
@@ -28,7 +27,7 @@
                             :class="[ donor.processing ? 'loading' : '']"
                             :disabled="donor.processing"
                     >
-                        {{trans('regiter')}}
+                        {{ trans('smart card') }}
                     </button>
 
                 </div>
@@ -38,7 +37,7 @@
                 <div class="flex w-full">
 
                     <h1 class="text-xl">
-                        {{trans('register-donor')}}
+                        {{ trans('register-donor') }}
                     </h1>
 
                 </div>
@@ -49,7 +48,7 @@
 
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('name')}}
+                                {{ trans('name') }}
                             </span>
                         </label>
 
@@ -58,13 +57,14 @@
                             <input
                                 v-model="donor.name"
                                 :class="[ errors.name ? 'input-error' : 'input-primary' ]"
-                                type="text" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered"
+                            id="name">
 
                         </div>
 
                         <label class="label" v-if="errors.name">
                             <span class="label-text-alt text-red-500">
-                                {{errors.name}}
+                                {{ errors.name }}
                             </span>
                         </label>
 
@@ -74,7 +74,7 @@
 
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('cpr')}}
+                                {{ trans('cpr') }}
                             </span>
                         </label>
 
@@ -83,13 +83,13 @@
                             <input
                                 v-model="donor.cpr"
                                 :class="[ errors.cpr ? 'input-error' : 'input-primary' ]"
-                                type="number" class="w-full input input-bordered">
+                                type="number" class="w-full input input-bordered" id="cpr">
 
                         </div>
 
                         <label class="label" v-if="errors.cpr">
                             <span class="label-text-alt text-red-500">
-                                {{errors.cpr}}
+                                {{ errors.cpr }}
                             </span>
                         </label>
 
@@ -98,7 +98,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('date-of-birth')}}
+                                {{ trans('date-of-birth') }}
                             </span>
                         </label>
 
@@ -106,14 +106,14 @@
 
                             <datepicker
                                 v-model="donor.birth_date"
-                                class="w-full input input-bordered"
+                                class="w-full input input-bordered"  id="birth"
                             />
 
                         </div>
 
                         <label class="label" v-if="errors.birth_date">
                             <span class="label-text-alt text-red-500">
-                                {{errors.birth_date}}
+                                {{ errors.birth_date }}
                             </span>
                         </label>
 
@@ -122,7 +122,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('gender')}}
+                                {{ trans('gender') }}
                             </span>
                         </label>
 
@@ -134,13 +134,14 @@
                                 trackBy="name"
                                 :searchable="true"
                                 class="w-full input input-bordered"
+                                id="gender"
                             ></Multiselect>
 
                         </div>
 
                         <label class="label" v-if="errors.gender">
                             <span class="label-text-alt text-red-500">
-                                {{errors.gender}}
+                                {{ errors.gender }}
                             </span>
                         </label>
 
@@ -149,7 +150,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('phone')}}
+                                {{ trans('phone') }}
                             </span>
                         </label>
 
@@ -163,7 +164,7 @@
 
                         <label class="label" v-if="errors.phone">
                             <span class="label-text-alt text-red-500">
-                                {{errors.phone}}
+                                {{ errors.phone }}
                             </span>
                         </label>
 
@@ -172,7 +173,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('email')}}
+                                {{ trans('email') }}
                             </span>
                         </label>
 
@@ -193,7 +194,7 @@
 
                         <label class="label" v-if="errors.email">
                             <span class="label-text-alt text-red-500">
-                                {{errors.email}}
+                                {{ errors.email }}
                             </span>
                         </label>
 
@@ -202,7 +203,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('nationality')}}
+                                {{ trans('nationality') }}
                             </span>
                         </label>
 
@@ -217,13 +218,13 @@
                             <input
                                 v-model="donor.nationality"
                                 :class="[ errors.nationality ? 'input-error' : 'input-primary' ]"
-                                type="text" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered"  id="nationality">
 
                         </div>
 
                         <label class="label" v-if="errors.nationality">
                             <span class="label-text-alt text-red-500">
-                                {{errors.nationality}}
+                                {{ errors.nationality }}
                             </span>
                         </label>
 
@@ -232,7 +233,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('city')}}
+                                {{ trans('city') }}
                             </span>
                         </label>
 
@@ -248,13 +249,13 @@
                             <input
                                 v-model="donor.city"
                                 :class="[ errors.city ? 'input-error' : 'input-primary' ]"
-                                type="text" class="w-full input input-bordered">
+                                type="text" class="w-full input input-bordered"  id="city">
 
                         </div>
 
                         <label class="label" v-if="errors.city">
                             <span class="label-text-alt text-red-500">
-                                {{errors.city}}
+                                {{ errors.city }}
                             </span>
                         </label>
 
@@ -263,7 +264,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('blood-group')}}
+                                {{ trans('blood-group') }}
                             </span>
                         </label>
 
@@ -280,7 +281,7 @@
 
                         <label class="label" v-if="errors.blod_group">
                             <span class="label-text-alt text-red-500">
-                                {{errors.blod_group}}
+                                {{ errors.blod_group }}
                             </span>
                         </label>
 
@@ -289,7 +290,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('diseases')}}
+                                {{ trans('diseases') }}
                             </span>
                         </label>
 
@@ -311,7 +312,7 @@
 
                                     <i :class="value.icon"></i>
 
-                                    {{value.name}}
+                                    {{ value.name }}
 
                                 </template>
 
@@ -319,7 +320,7 @@
 
                                     <i :class="option.icon" class="mr-2"></i>
 
-                                    {{option.name}}
+                                    {{ option.name }}
 
                                 </template>
 
@@ -329,7 +330,7 @@
 
                         <label class="label" v-if="errors.diseases">
                             <span class="label-text-alt text-red-500">
-                                {{errors.diseases}}
+                                {{ errors.diseases }}
                             </span>
                         </label>
 
@@ -338,7 +339,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('last-travel-date')}}
+                                {{ trans('last-travel-date') }}
                             </span>
                         </label>
 
@@ -353,7 +354,7 @@
 
                         <label class="label" v-if="errors.last_travel_date">
                             <span class="label-text-alt text-red-500">
-                                {{errors.last_travel_date}}
+                                {{ errors.last_travel_date }}
                             </span>
                         </label>
 
@@ -362,7 +363,7 @@
                     <div class="flex form-control w-full px-2" v-if="false">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('last-donate-date')}}
+                                {{ trans('last-donate-date') }}
                             </span>
                         </label>
 
@@ -377,7 +378,7 @@
 
                         <label class="label" v-if="errors.last_donate_date">
                             <span class="label-text-alt text-red-500">
-                                {{errors.last_donate_date}}
+                                {{ errors.last_donate_date }}
                             </span>
                         </label>
 
@@ -386,7 +387,7 @@
                     <div class="flex form-control w-full md:w-1/2 px-2">
                         <label class="label">
                             <span class="label-text required">
-                                {{trans('time')}}
+                                {{ trans('time') }}
                             </span>
                         </label>
 
@@ -423,14 +424,14 @@
                                    class="checkbox">
 
                             <span class="label-text ml-2">
-                                {{trans('has-green-shield')}}
+                                {{ trans('has-green-shield') }}
                             </span>
 
                         </label>
 
                         <label class="label" v-if="errors.has_green_shield">
                             <span class="label-text-alt text-red-500">
-                                {{errors.has_green_shield}}
+                                {{ errors.has_green_shield }}
                             </span>
                         </label>
 
@@ -445,7 +446,7 @@
                             :class="[ donor.processing ? 'loading' : '']"
                             :disabled="donor.processing"
                     >
-                        {{trans('regiter')}}
+                        {{ trans('regiter') }}
                     </button>
 
                 </div>
@@ -461,6 +462,8 @@
 <script>
 
 import datepicker from 'vue3-datepicker';
+import * as $ from 'jquery';
+
 
 import Multiselect from '@vueform/multiselect';
 
@@ -491,7 +494,7 @@ export default {
 
     },
 
-    data: function() {
+    data: function () {
 
         return {
 
@@ -527,19 +530,13 @@ export default {
                     name_en: 'Male',
                     name_ar: 'ذكر'
                 },
-                {
-                    key: 'female',
-                    name_en: 'Female',
-                    name_ar: 'مؤنث'
-                },
             ]
 
         };
 
     },
 
-    mounted()
-    {
+    mounted() {
 
         console.log(this.return_array_for_select(this.diseases, 'id', 'name'));
 
@@ -547,31 +544,39 @@ export default {
 
     methods: {
 
-        register: function()
-        {
+        register: function () {
 
             this.donor.transform(data => ({
 
-                ... data,
+                ...data,
 
             }))
-                .post(this.route('donor-register'), {
+                .post(this.route('admin-donor-register'), {
 
                     onFinish: () => {
 
-                        if ( this.$page.props?.flash?.toast )
-                        {
-
-                            this.$moshaToast( this.trans( this.$page.props.flash?.toast?.message ) , {
-
-                                type: this.$page.props.flash?.toast?.status,
-                                showIcon: true,
-                                hideProgressBar: true,
-
-
-                            });
-
+                        console.log("ttttt"+this.$page.props.flash?.toast?.status);
+                        if (this.$page.props.flash?.toast?.status=='success'){
+                            window.location.replace("/admin/donors/"+this.$page.props.flash?.toast?.message+"/print");
                         }
+
+                        if (this.$page.props.flash?.toast?.status!='success'){
+
+                            if (this.$page.props?.flash?.toast) {
+
+                                this.$moshaToast(this.trans(this.$page.props.flash?.toast?.message), {
+
+                                    type: this.$page.props.flash?.toast?.status,
+                                    showIcon: true,
+                                    hideProgressBar: true,
+
+
+                                });
+
+                            }
+                        }
+
+
 
                     },
 
@@ -609,8 +614,67 @@ export default {
         },
 
 
-        fetch: function()
-        {
+        fetch: function () {
+            var x =this.donor;
+            // axios.post('http://localhost:5050/api/operation/ReadCard', {
+            //     "ReadCardInfo": false,
+            //     "ReadPersonalInfo": false,
+            //     "ReadAddressDetails": true,
+            //     "ReadBiometrics": true,
+            //     "ReadEmploymentInfo": false,
+            //     "ReadImmigrationDetails": true,
+            //     "ReadTrafficDetails": false,
+            //     "SilentReading": false,
+            //     "ReaderIndex": -1,
+            //     "ReaderName": "",
+            //     "OutputFormat": "JSON"
+            // }, {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Access-Control-Allow-Origin': '*',
+            //         'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+            //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type,' +
+            //             '    Accept, x-client-key, x-client-token, x-client-secret, Authorization',
+            //     }
+            // }).then((response) => {
+            //     console.log(response);
+            // })
+
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:5050/api/operation/ReadCard',
+                // dataType: "json",
+                data: JSON.stringify(
+                    {
+                        "ReadCardInfo": false,
+                        "ReadPersonalInfo": false,
+                        "ReadAddressDetails": true,
+                        "ReadBiometrics": true,
+                        "ReadEmploymentInfo": false,
+                        "ReadImmigrationDetails": true,
+                        "ReadTrafficDetails": false,
+                        "SilentReading": false,
+                        "ReaderIndex": -1,
+                        "ReaderName": "",
+                        "OutputFormat": "JSON"
+                    }),
+                success: function (data) {
+                    console.log(x);
+
+                    x.name=data.ArabicFullName;
+                    x.cpr=data.IdNumber;
+                    x.birth_date= new Date(data.BirthDate);
+                    x.nationality=data.MiscellaneousTextData.ArabicCountryName;
+                    x.city=data.MiscellaneousTextData.BlockNameArabic;
+                    x.gender="male";
+
+
+                },
+                error: function (xhr, tst, err) {
+
+                }
+            });
+            this.donor=x;
 
         }
 
@@ -618,9 +682,9 @@ export default {
 
     computed: {
 
-        timings_for_select: function() {
+        timings_for_select: function () {
 
-            return Object.values(this.timings).map( x => {
+            return Object.values(this.timings).map(x => {
 
                 return {
                     value: x.time,

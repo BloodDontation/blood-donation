@@ -300,13 +300,20 @@ class donorsController extends Controller
         $selected_time  = $request->selected_time;
 
         $donor_history  = $request->only(['last_travel_date']);
+        $cpr  = $request->post('cpr');
 
         $diseases       = $request->diseases;
 
         // $reg
         $result = $this->registerService->register_donor($donor, $selected_time, $donor_history, $diseases);
 
-        return Redirect::back()->with('toast', $result);
+        if($result['status']=="success"){
+            $result['message']=$cpr;
+            return Redirect::back()->with('toast', $result);
+        }else{
+            return Redirect::back()->with('toast', $result);
+        }
+
 
     }
 

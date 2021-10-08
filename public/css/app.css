@@ -1902,11 +1902,46 @@ html {
 .btn-group>input[type=radio].btn:before {
 	content: attr(data-title);
 }
+.card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	position: relative;
+	border-radius: var(--rounded-box,1rem);
+}
+.card:focus {
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
 .card-body {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
 	padding: var(--padding-card,2rem);
+}
+.card figure,.card figure>* {
+	width: 100%;
+}
+.card.image-full {
+	display: grid;
+}
+.card.image-full:before {
+	position: relative;
+	content: "";
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--n)/var(--tw-bg-opacity,1));
+	opacity: .75;
+	z-index: 10;
+	border-radius: var(--rounded-box,1rem);
+}
+.card.image-full:before,.card.image-full>* {
+	grid-column-start: 1;
+	grid-row-start: 1;
+}
+.card.image-full>figure img {
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
 }
 .card.image-full>.card-body {
 	position: relative;
@@ -2356,6 +2391,9 @@ html {
 		transform: scale(1);
 	}
 }
+.card:focus-visible {
+	box-shadow: 0 0 0 2px currentColor;
+}
 .card.bordered {
 	--tw-border-opacity: 1;
 	border-color: hsla(var(--b2)/var(--tw-border-opacity,1));
@@ -2365,6 +2403,9 @@ html {
 	font-size: .875rem;
 	line-height: 1.25rem;
 	padding: 1rem;
+}
+.card.compact .card-title {
+	margin-bottom: .25rem;
 }
 .checkbox {
 	--chkbg: var(--bc);

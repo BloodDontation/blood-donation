@@ -117,10 +117,11 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
         Route::prefix('donors/')->group(function () {
 
+            Route::get('/{cpr}/print', [\App\Http\Controllers\Admin\donorsController::class, 'print_form'])->name('admin-donors-print');
 
             Route::get('registration', [\App\Http\Controllers\Admin\donorsController::class, 'register_form'])->name('admin-register-form');
 
-            Route::post('register', [\App\Http\Controllers\Admin\donorsController::class, 'register'])->name('admin-register');
+            Route::post('register', [\App\Http\Controllers\Admin\donorsController::class, 'register'])->name('admin-donor-register');
 
             Route::get('cancel-registration', function () {
 
