@@ -18,9 +18,9 @@ class Donor extends Model
 
     protected $hidden   =   ['created_at', 'updated_at'];
 
-    // public function diseases()
-    // {
-    //     return $this->hasMany('\App\Models\Disease', '');
-    // }
+    public function campaign_donor()
+    {
+        return $this->belongsToMany('\App\Models\Admin\Campaign', 'campaign_donors', 'i_donors', 'i_campaigns');
+    }
 
 }

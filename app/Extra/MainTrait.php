@@ -45,6 +45,15 @@ trait MainTrait {
                 "childs"            =>  [],
             ],
 
+            "donors" => [
+                "title"             =>  "plans",
+                "icon"              =>  "fas fa-building",
+                "route"             =>  "admin-donors-index",
+                "is_active"         =>  false,
+                "permission"        =>  "dashboard",
+                "childs"            =>  [],
+            ],
+
 
 
         ]
@@ -58,10 +67,9 @@ trait MainTrait {
 
             'dashboard'         => 0,
             'campaigns'         => 1,
-            'user-management'   => 2,
-            'settings'          => 3,
-            'stages'            => 4,
-            'plans'             => 5,
+            'stages'            => 2,
+            'plans'             => 3,
+            'donors'            => 4,
             default             => 0,
 
         };
